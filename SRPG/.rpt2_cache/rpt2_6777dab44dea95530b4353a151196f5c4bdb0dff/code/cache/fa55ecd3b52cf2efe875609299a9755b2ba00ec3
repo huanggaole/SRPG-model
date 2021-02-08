@@ -1,0 +1,4 @@
+{
+  "code": "export default class GameScene extends Laya.Scene {\r\n    createChildren() {\r\n        super.createChildren();\r\n        this.loadScene(\"GameScene\");\r\n    }\r\n    onAwake() {\r\n    }\r\n}\r\n",
+  "references": []
+}
