@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":2,
-    "selecteID":3,
+    "selectedBox":3,
+    "selecteID":8,
     "searchKey":"Scene",
     "props":{"width":1080,"sceneColor":"#000000","height":640},
     "nodeParent":-1,
-    "maxID":4,
+    "maxID":20,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -18,15 +18,87 @@
             "x":15,
             "type":"Panel",
             "searchKey":"Panel",
-            "props":{"y":0,"x":0,"width":1080,"height":640,"bgColor":"#000000"},
+            "props":{"y":0,"x":0,"width":1080,"height":550,"bgColor":"#000000"},
             "nodeParent":2,
             "label":"Panel",
-            "isDirectory":false,
+            "isOpen":true,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "compId":3,
             "child":[
-                ]
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,mapImage",
+                    "props":{"y":275,"x":540,"var":"mapImage","pivotY":275,"pivotX":540},
+                    "nodeParent":3,
+                    "label":"mapImage",
+                    "isOpen":null,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":8,
+                    "child":[
+                        {
+                            "type":"Script",
+                            "switchAble":true,
+                            "source":"src/script/MapScript.ts",
+                            "searchKey":"Script,MapScript",
+                            "removeAble":true,
+                            "props":{},
+                            "nodeParent":8,
+                            "label":"MapScript",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":9,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Panel",
+            "searchKey":"Panel",
+            "props":{"y":549,"x":0,"width":1080},
+            "nodeParent":2,
+            "label":"Panel",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":5,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"width":1080,"skin":"comp/img_bg3.png","sizeGrid":"12,9,11,8","height":91},
+                    "nodeParent":5,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":4,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"RadioGroup",
+                    "searchKey":"RadioGroup,scaleRadio",
+                    "props":{"y":14,"x":18,"width":420,"var":"scaleRadio","skin":"comp/radiogroup.png","labels":"X1,X2,X4","labelSize":60,"labelFont":"Arial","height":66},
+                    "nodeParent":5,
+                    "label":"scaleRadio",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":19,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {

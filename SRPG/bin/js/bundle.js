@@ -1,12 +1,121 @@
 (function () {
     'use strict';
 
+    var TerrianType;
+    (function (TerrianType) {
+        TerrianType[TerrianType["DeepWater"] = 0] = "DeepWater";
+        TerrianType[TerrianType["ShallowWater"] = 1] = "ShallowWater";
+        TerrianType[TerrianType["Plain"] = 2] = "Plain";
+        TerrianType[TerrianType["Grass"] = 3] = "Grass";
+        TerrianType[TerrianType["Road"] = 4] = "Road";
+    })(TerrianType || (TerrianType = {}));
+    var SurfaceType;
+    (function (SurfaceType) {
+        SurfaceType[SurfaceType["None"] = 0] = "None";
+        SurfaceType[SurfaceType["Tree"] = 1] = "Tree";
+        SurfaceType[SurfaceType["Rock"] = 2] = "Rock";
+    })(SurfaceType || (SurfaceType = {}));
+    class Map {
+        static init(_height, _width, _tarray, _sarray) {
+            this.height = _height;
+            this.width = _width;
+            this.terrianarray = _tarray;
+            this.surfacearray = _sarray;
+        }
+        static initlevel1() {
+            this.height = 50;
+            this.width = 100;
+            this.terrianarray = [];
+            this.surfacearray = [];
+            for (let i = 0; i < this.height; i++) {
+                let ttemprow = [];
+                let stemprow = [];
+                for (let j = 0; j < this.width; j++) {
+                    ttemprow.push(TerrianType.Grass);
+                    stemprow.push(SurfaceType.None);
+                }
+                this.terrianarray.push(ttemprow);
+                this.surfacearray.push(stemprow);
+            }
+        }
+    }
+    Map.tilewidth = 16;
+    Map.tileheight = 16;
+    Map.terrianarray = [];
+    Map.surfacearray = [];
+
+    class MapScript extends Laya.Script {
+        constructor() {
+            super();
+            this.terrainImages = [];
+            let terrainpaths = [
+                "comp/terrain_deepwater.png",
+                "comp/terrain_shallowwater.png",
+                "comp/terrain_plain.png",
+                "comp/terrain_grass.png",
+                "comp/terrain_road.png"
+            ];
+            for (let i = 0; i < terrainpaths.length; i++) {
+                this.terrainImages.push(new Laya.Image(terrainpaths[i]));
+            }
+        }
+        onStart() {
+        }
+        onRefresh() {
+            let image = this.owner;
+            image.graphics.clear();
+            image.size(Map.width * Map.tilewidth, Map.height * Map.tileheight);
+            for (let i = 0; i < Map.height; i++) {
+                for (let j = 0; j < Map.width; j++) {
+                    image.graphics.drawImage(this.terrainImages[Map.terrianarray[i][j]].source, j * Map.tilewidth, i * Map.tileheight, Map.tilewidth, Map.tileheight);
+                }
+            }
+        }
+        onMouseDown() {
+            this.lastX = Laya.stage.mouseX;
+            this.lastY = Laya.stage.mouseY;
+            this.ifMove = true;
+        }
+        onMouseUp() {
+            this.ifMove = false;
+        }
+        onMouseOut() {
+            this.ifMove = false;
+        }
+        onMouseMove() {
+            if (this.ifMove) {
+                let currentX = Laya.stage.mouseX;
+                let currentY = Laya.stage.mouseY;
+                let image = this.owner;
+                image.pivotX -= (currentX - this.lastX) / image.scaleX;
+                image.pivotY -= (currentY - this.lastY) / image.scaleY;
+                this.lastX = currentX;
+                this.lastY = currentY;
+            }
+        }
+    }
+
     class GameScene extends Laya.Scene {
         createChildren() {
             super.createChildren();
             this.loadScene("GameScene");
         }
+        onScaleChange() {
+            if (this.scaleRadio.selectedIndex == 0) {
+                this.mapImage.scale(1, 1);
+            }
+            if (this.scaleRadio.selectedIndex == 1) {
+                this.mapImage.scale(2, 2);
+            }
+            if (this.scaleRadio.selectedIndex == 2) {
+                this.mapImage.scale(4, 4);
+            }
+        }
         onAwake() {
+            this.mapScript = this.mapImage.getComponent(MapScript);
+            this.scaleRadio.on(Laya.Event.CHANGE, this, this.onScaleChange);
+            Map.initlevel1();
+            this.mapScript.onRefresh();
         }
     }
 
@@ -29,6 +138,7 @@
             var reg = Laya.ClassUtils.regClass;
             reg("scene/StartScene.ts", StartScene);
             reg("scene/GameScene.ts", GameScene);
+            reg("script/MapScript.ts", MapScript);
         }
     }
     GameConfig.width = 1080;

@@ -1,0 +1,6 @@
+{
+  "code": "import GameScene from \"./GameScene\";\r\nexport default class StartScene extends Laya.Scene {\r\n    createChildren() {\r\n        super.createChildren();\r\n        this.loadScene(\"StartScene\");\r\n    }\r\n    onAwake() {\r\n        const gamescene = new GameScene();\r\n        this.startBtn.on(Laya.Event.CLICK, this, () => {\r\n            Laya.stage.addChild(gamescene);\r\n        });\r\n    }\r\n}\r\n",
+  "references": [
+    "/Users/huanggaole/SRPG-model/SRPG/src/scene/GameScene.ts"
+  ]
+}

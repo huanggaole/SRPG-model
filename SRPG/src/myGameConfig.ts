@@ -1,5 +1,6 @@
 import StartScene from "./scene/StartScene";
 import GameScene from "./scene/GameScene";
+import MapScript from "./script/MapScript";
 
 /*
 * 游戏初始化配置;
@@ -22,6 +23,7 @@ export default class GameConfig{
         var reg: Function = Laya.ClassUtils.regClass;
         reg("scene/StartScene.ts",StartScene);
         reg("scene/GameScene.ts",GameScene);
+        reg("script/MapScript.ts",MapScript);
     }
 }
 GameConfig.init();
