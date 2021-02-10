@@ -44,10 +44,20 @@ export default class MapScript extends Laya.Script{
 
     onMouseUp(){
         this.ifMove = false;
+        const image = this.owner as Laya.Image;
+        let roundx = Math.round(image.pivotX / Map.tilewidth);
+        let roundy = Math.round(image.pivotY / Map.tileheight)
+        if(roundx < 0) roundx = 0;
+        if(roundx >= Map.width) roundx = Map.width - 1;
+        if(roundy < 0) roundy = 0;
+        if(roundy >= Map.height) roundy = Map.height - 1;
+        let newx = roundx * Map.tilewidth;
+        let newy = roundy * Map.tileheight;
+        Laya.Tween.to(image,{pivotX:newx, pivotY:newy}, 100);
     }
 
     onMouseOut(){
-        this.ifMove = false;
+        this.onMouseUp();
     }
 
     onMouseMove(){
@@ -57,7 +67,7 @@ export default class MapScript extends Laya.Script{
             let image = this.owner as Laya.Image;
             image.pivotX -= (currentX - this.lastX) / image.scaleX;
             image.pivotY -= (currentY - this.lastY) / image.scaleY;
-                   
+            
             this.lastX = currentX;
             this.lastY = currentY;
         }

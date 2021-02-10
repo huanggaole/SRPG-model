@@ -1,7 +1,0 @@
-{
-  "code": "import Map from \"../data/Map\";\r\nimport MapScript from \"../script/MapScript\";\r\nexport default class GameScene extends Laya.Scene {\r\n    createChildren() {\r\n        super.createChildren();\r\n        this.loadScene(\"GameScene\");\r\n    }\r\n    onScaleChange() {\r\n        if (this.scaleRadio.selectedIndex == 0) {\r\n            this.mapImage.scale(1, 1);\r\n        }\r\n        if (this.scaleRadio.selectedIndex == 1) {\r\n            this.mapImage.scale(2, 2);\r\n        }\r\n        if (this.scaleRadio.selectedIndex == 2) {\r\n            this.mapImage.scale(4, 4);\r\n        }\r\n    }\r\n    onAwake() {\r\n        this.mapScript = this.mapImage.getComponent(MapScript);\r\n        this.scaleRadio.on(Laya.Event.CHANGE, this, this.onScaleChange);\r\n        Map.initlevel1();\r\n        this.mapScript.onRefresh();\r\n    }\r\n}\r\n",
-  "references": [
-    "/Users/huanggaole/SRPG-model/SRPG/src/data/Map.ts",
-    "/Users/huanggaole/SRPG-model/SRPG/src/script/MapScript.ts"
-  ]
-}

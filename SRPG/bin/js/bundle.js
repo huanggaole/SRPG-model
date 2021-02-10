@@ -78,9 +78,23 @@
         }
         onMouseUp() {
             this.ifMove = false;
+            const image = this.owner;
+            let roundx = Math.round(image.pivotX / Map.tilewidth);
+            let roundy = Math.round(image.pivotY / Map.tileheight);
+            if (roundx < 0)
+                roundx = 0;
+            if (roundx >= Map.width)
+                roundx = Map.width - 1;
+            if (roundy < 0)
+                roundy = 0;
+            if (roundy >= Map.height)
+                roundy = Map.height - 1;
+            let newx = roundx * Map.tilewidth;
+            let newy = roundy * Map.tileheight;
+            Laya.Tween.to(image, { pivotX: newx, pivotY: newy }, 100);
         }
         onMouseOut() {
-            this.ifMove = false;
+            this.onMouseUp();
         }
         onMouseMove() {
             if (this.ifMove) {
@@ -103,12 +117,15 @@
         onScaleChange() {
             if (this.scaleRadio.selectedIndex == 0) {
                 this.mapImage.scale(1, 1);
+                this.cursor.scale(1, 1);
             }
             if (this.scaleRadio.selectedIndex == 1) {
                 this.mapImage.scale(2, 2);
+                this.cursor.scale(2, 2);
             }
             if (this.scaleRadio.selectedIndex == 2) {
                 this.mapImage.scale(4, 4);
+                this.cursor.scale(4, 4);
             }
         }
         onAwake() {

@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":3,
-    "selecteID":8,
+    "selecteID":20,
     "searchKey":"Scene",
     "props":{"width":1080,"sceneColor":"#000000","height":640},
     "nodeParent":-1,
-    "maxID":20,
+    "maxID":21,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -34,13 +34,14 @@
                     "props":{"y":275,"x":540,"var":"mapImage","pivotY":275,"pivotX":540},
                     "nodeParent":3,
                     "label":"mapImage",
-                    "isOpen":null,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":8,
                     "child":[
                         {
+                            "x":45,
                             "type":"Script",
                             "switchAble":true,
                             "source":"src/script/MapScript.ts",
@@ -56,6 +57,20 @@
                             "child":[
                                 ]
                         }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,cursor",
+                    "props":{"y":275,"x":540,"var":"cursor","skin":"comp/cursor.png"},
+                    "nodeParent":3,
+                    "label":"cursor",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":20,
+                    "child":[
+                        ]
                 }]
         },
         {
@@ -89,7 +104,7 @@
                     "x":30,
                     "type":"RadioGroup",
                     "searchKey":"RadioGroup,scaleRadio",
-                    "props":{"y":14,"x":18,"width":420,"var":"scaleRadio","skin":"comp/radiogroup.png","labels":"X1,X2,X4","labelSize":60,"labelFont":"Arial","height":66},
+                    "props":{"y":14,"x":18,"width":420,"var":"scaleRadio","skin":"comp/radiogroup.png","selectedIndex":0,"labels":"X1,X2,X4","labelSize":60,"labelFont":"Arial","height":66},
                     "nodeParent":5,
                     "label":"scaleRadio",
                     "isDirectory":false,
