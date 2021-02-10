@@ -75,10 +75,23 @@
             this.lastX = Laya.stage.mouseX;
             this.lastY = Laya.stage.mouseY;
             this.ifMove = true;
+            this.presstime = new Date();
         }
         onMouseUp() {
             this.ifMove = false;
+            let nowtime = new Date();
+            let deltime = null;
+            if (this.presstime) {
+                deltime = nowtime.getTime() - this.presstime.getTime();
+                this.presstime = null;
+            }
             const image = this.owner;
+            if (deltime && deltime < 200) {
+                let newx = image.pivotX + (Laya.stage.mouseX - image.x) / image.scaleX - Map.tilewidth / 2.0;
+                let newy = image.pivotY + (Laya.stage.mouseY - image.y) / image.scaleY - Map.tileheight / 2.0;
+                image.pivotX = newx;
+                image.pivotY = newy;
+            }
             let roundx = Math.round(image.pivotX / Map.tilewidth);
             let roundy = Math.round(image.pivotY / Map.tileheight);
             if (roundx < 0)
